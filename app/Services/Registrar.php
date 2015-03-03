@@ -1,6 +1,6 @@
-<?php namespace App\Services;
+<?php namespace Clover\Services;
 
-use App\User;
+use Clover\User;
 use Validator;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
 

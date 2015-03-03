@@ -1,4 +1,4 @@
-<?php namespace App\Events;
+<?php namespace Clover\Events;
 
 abstract class Event {
 
