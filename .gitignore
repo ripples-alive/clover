@@ -1,0 +1,14 @@
+/vendor
+/node_modules
+.env
+
+.idea
+
+*.iml
+*.ipr
+*.iws
+
+.DS_Store
+*.swp
+
+_ide_helper.php
