@@ -29,6 +29,7 @@ class Kernel extends HttpKernel {
 	 * @var array
 	 */
 	protected $routeMiddleware = [
+        'userFilter' => 'Clover\Http\Middleware\ConfirmUserAuth'
 	];
 
 }

@@ -8,12 +8,19 @@
 
 namespace Clover\Http\Controllers;
 
+use UserAuth;
 use ReqLog;
 
 class UserController extends Controller {
 
+    public function __construct()
+    {
+        $this->middleware('userFilter');
+    }
+
     public function getIndex()
     {
+        var_dump(UserAuth::id());
         ReqLog::debug('%s is %s', 'this', 'test');
         ReqLog::debug('%s is %s', 'this', 'test again');
     }

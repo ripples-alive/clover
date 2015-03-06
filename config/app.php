@@ -150,6 +150,7 @@ return [
          */
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
         'Clover\Providers\ReqLogServiceProvider',
+        'Clover\Providers\UserAuthServiceProvider',
 	],
 
 	/*
@@ -201,7 +202,8 @@ return [
         /*
          * My Own Alias
          */
-        'ReqLog'    => 'Clover\Facades\ReqLog'
+        'ReqLog'    => 'Clover\Facades\ReqLog',
+        'UserAuth'  => 'Clover\Facades\UserAuth',
 	],
 
 ];
