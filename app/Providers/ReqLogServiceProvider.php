@@ -14,6 +14,8 @@ use Clover\Services\ReqLog;
 
 class ReqLogServiceProvider extends ServiceProvider {
 
+    // protected $defer = true;
+
     public function register()
     {
         $this->app->singleton('reqLog', function ($app) {
