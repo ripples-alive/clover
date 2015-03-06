@@ -145,6 +145,10 @@ return [
 		'Clover\Providers\EventServiceProvider',
 		'Clover\Providers\RouteServiceProvider',
 
+        /**
+         * My Own Service Providers...
+         */
+        'Clover\Providers\ReqLogServiceProvider',
 	],
 
 	/*

@@ -8,20 +8,20 @@
 
 namespace Clover\Http\Controllers;
 
+use Clover\Facades\ReqLog;
 
 class UserController extends Controller {
 
     public function getIndex()
     {
-        return response()->json([
-            'a' => '测试'
-        ]);
+        ReqLog::debug('hehe');
     }
 
-    public function getTest() {
+    public function getTest()
+    {
         return response()->json([
             'test' => '这里是test.'
         ]);
     }
 
-} 
+}
