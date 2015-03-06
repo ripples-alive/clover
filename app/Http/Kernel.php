@@ -16,6 +16,11 @@ class Kernel extends HttpKernel {
 		'Illuminate\Session\Middleware\StartSession',
 		'Illuminate\View\Middleware\ShareErrorsFromSession',
 		'Clover\Http\Middleware\VerifyCsrfToken',
+
+        /*
+         * My Own Global Middleware
+         */
+        'Clover\Http\Middleware\RequestId',
 	];
 
 	/**
