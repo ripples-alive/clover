@@ -145,9 +145,10 @@ return [
 		'Clover\Providers\EventServiceProvider',
 		'Clover\Providers\RouteServiceProvider',
 
-        /**
+        /*
          * My Own Service Providers...
          */
+        'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
         'Clover\Providers\ReqLogServiceProvider',
 	],
 
@@ -197,6 +198,10 @@ return [
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
 
+        /*
+         * My Own Alias
+         */
+        'ReqLog'    => 'Clover\Facades\ReqLog'
 	],
 
 ];

@@ -8,13 +8,14 @@
 
 namespace Clover\Http\Controllers;
 
-use Clover\Facades\ReqLog;
+use ReqLog;
 
 class UserController extends Controller {
 
     public function getIndex()
     {
-        ReqLog::debug('hehe');
+        ReqLog::debug('%s is %s', 'this', 'test');
+        ReqLog::debug('%s is %s', 'this', 'test again');
     }
 
     public function getTest()
