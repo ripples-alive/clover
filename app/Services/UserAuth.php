@@ -8,6 +8,8 @@
 
 namespace Clover\Services;
 
+use Clover\Exceptions\AuthException;
+
 class UserAuth {
 
     public function __construct()
@@ -23,7 +25,7 @@ class UserAuth {
     public function authWithToken($token)
     {
         if (!$token) {
-            throw new \Exception('测试错误');
+            throw new AuthException('token无效');
         }
         $this->userId = $token;
     }

@@ -1,7 +1,9 @@
 <?php namespace Clover\Exceptions;
 
-use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+
+use ReqLog;
 
 class Handler extends ExceptionHandler {
 
@@ -22,9 +24,13 @@ class Handler extends ExceptionHandler {
 	 * @param  \Exception  $e
 	 * @return void
 	 */
-	public function report(Exception $e)
+	public function report(\Exception $e)
 	{
-		return parent::report($e);
+        if ($this->shouldntReport($e)) {
+            ReqLog::error('None reported exception with message "%s" in %s:%s', $e->getMessage(), $e->getFile(), $e->getLine());
+        } else {
+            ReqLog::error($e);
+        }
 	}
 
 	/**
@@ -34,9 +40,18 @@ class Handler extends ExceptionHandler {
 	 * @param  \Exception  $e
 	 * @return \Illuminate\Http\Response
 	 */
-	public function render($request, Exception $e)
+	public function render($request, \Exception $e)
 	{
-		return parent::render($request, $e);
+        if ($e instanceof HttpException) {
+            return parent::render($request, $e);
+        }
+
+        return response()->json([
+            'error' => ($e instanceof Exception) ? $e->getName() : 'error',
+            'message' => $e->getMessage(),
+            'rqid' => ReqLog::getRequestId(),
+            'stack' => config('app.debug') ? $e->getTrace() : null,
+        ]);
 	}
 
 }

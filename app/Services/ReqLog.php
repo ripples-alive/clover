@@ -32,7 +32,7 @@ class ReqLog {
 
     public function endRequest()
     {
-        self::info('END');
+        self::info('END NORMALLY');
     }
 
     public function debug()
