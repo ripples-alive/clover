@@ -149,6 +149,7 @@ return [
          * My Own Service Providers...
          */
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
+        'Clover\Providers\RandomProvider',
         'Clover\Providers\ReqLogServiceProvider',
         'Clover\Providers\UserAuthServiceProvider',
 	],
@@ -204,6 +205,7 @@ return [
          */
         'ReqLog'    => 'Clover\Facades\ReqLog',
         'UserAuth'  => 'Clover\Facades\UserAuth',
+        'Random'    => 'Clover\Facades\Random',
 	],
 
 ];
