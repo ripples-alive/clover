@@ -10,6 +10,7 @@ namespace Clover\Http\Controllers;
 
 use Request;
 use Hash;
+use Validator;
 
 use UserAuth;
 use Clover\Exceptions\InputException;
@@ -19,16 +20,28 @@ class GuestController extends Controller {
 
     public function userRegister()
     {
-        // TODO
         $username = Request::input('username');
+        if (Validator::make(['key' => $username], ['key' => 'required|unique:user,username'])->fails()) {
+            throw new InputException('用户名已存在');
+        }
+
         $password = Request::input('password');
+        if (Validator::make(['key' => $password], ['key' => 'min:6'])->fails()) {
+            throw new InputException('密码至少为6位');
+        }
         if ($password !== Request::input('password_confirm')) {
             throw new InputException('两次密码不一致');
+        }
+
+        $email = Request::input('email');
+        if (Validator::make(['key' => $email], ['key' => 'required|email'])->fails()) {
+            throw new InputException('Email地址不合法');
         }
 
         $user = User::create([
             'username' => $username,
             'password' => Hash::make($password),
+            'email' => $email,
         ]);
 
         return [
@@ -39,7 +52,6 @@ class GuestController extends Controller {
 
     public function userLogin()
     {
-        // TODO
         $username = Request::input('username');
         $password = Request::input('password');
 
