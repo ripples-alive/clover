@@ -32,4 +32,14 @@ class UserController extends Controller {
         ]);
     }
 
+    public function getInfo()
+    {
+        // TODO
+    }
+
+    public function getUpdateInfo()
+    {
+        // TODO
+    }
+
 }

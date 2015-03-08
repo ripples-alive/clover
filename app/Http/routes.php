@@ -11,6 +11,11 @@
 |
 */
 
+Route::group(['prefix' => 'user'], function () {
+    Route::post('register', 'GuestController@userRegister');
+    Route::post('login', 'GuestController@userLogin');
+});
+
 Route::controllers([
-    'user' => 'UserController'
+    'user' => 'UserController',
 ]);
