@@ -11,6 +11,7 @@ namespace Clover\Http\Controllers;
 use Request;
 
 use UserAuth;
+use Clover\Exceptions\NotFoundException;
 use Clover\Exceptions\InputException;
 use Clover\Enumerations\TopicType;
 use Clover\Models\Topic;
@@ -22,14 +23,33 @@ class TopicController extends Controller {
         $this->middleware('userFilter');
     }
 
+    /**
+     * @get type
+     */
     public function getList()
     {
-        // TODO
+        // TODO: Add more parameters
+        $topics = Topic::where('type', TopicType::parse(Request::input('type')))->orderBy('created_at', 'desc')->get();
+        return [
+            'message' => '列出帖子成功',
+            'topics' => $topics,
+        ];
     }
 
+    /**
+     * @get id
+     */
     public function getInfo()
     {
-        // TODO
+        $topic = Topic::find(intval(Request::input('id')));
+        if (empty($topic)) {
+            throw new NotFoundException('帖子不存在');
+        }
+
+        return [
+            'message' => '获取信息成功',
+            'topic' => $topic,
+        ];
     }
 
     /**
