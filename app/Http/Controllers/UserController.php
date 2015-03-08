@@ -8,6 +8,8 @@
 
 namespace Clover\Http\Controllers;
 
+use Request;
+
 use UserAuth;
 use ReqLog;
 
@@ -32,12 +34,22 @@ class UserController extends Controller {
         ]);
     }
 
+    public function postLogout()
+    {
+        $token = Request::header('token', Request::input('token'));
+        UserAuth::logout($token);
+
+        return [
+            'message' => '登出成功',
+        ];
+    }
+
     public function getInfo()
     {
         // TODO
     }
 
-    public function getUpdateInfo()
+    public function postUpdateInfo()
     {
         // TODO
     }

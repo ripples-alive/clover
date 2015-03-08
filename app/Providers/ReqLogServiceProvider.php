@@ -14,7 +14,7 @@ use Clover\Services\ReqLog;
 
 class ReqLogServiceProvider extends ServiceProvider {
 
-    // protected $defer = true;
+//    protected $defer = true;
 
     public function register()
     {
@@ -22,4 +22,9 @@ class ReqLogServiceProvider extends ServiceProvider {
             return new ReqLog();
         });
     }
+
+//    public function provides()
+//    {
+//        return ['reqLog'];
+//    }
 } 

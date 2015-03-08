@@ -8,20 +8,21 @@
 
 namespace Clover\Http\Controllers;
 
+use Request;
 use Hash;
-use Illuminate\Http\Request;
 
+use UserAuth;
 use Clover\Exceptions\InputException;
 use Clover\Models\User;
 
 class GuestController extends Controller {
 
-    public function userRegister(Request $request)
+    public function userRegister()
     {
         // TODO
-        $username = $request->input('username');
-        $password = $request->input('password');
-        if ($password !== $request->input('password_confirm')) {
+        $username = Request::input('username');
+        $password = Request::input('password');
+        if ($password !== Request::input('password_confirm')) {
             throw new InputException('两次密码不一致');
         }
 
@@ -36,22 +37,17 @@ class GuestController extends Controller {
         ];
     }
 
-    public function userLogin(Request $request)
+    public function userLogin()
     {
         // TODO
-        $username = $request->input('username');
-        $password = $request->input('password');
+        $username = Request::input('username');
+        $password = Request::input('password');
 
-        $user = User::where('username', $username)->first();
-        if (!$user or !Hash::check($password, $user->password)) {
-            throw new InputException('用户名或密码错误');
-        }
-
-        $token = 'TODO';
+        $token = UserAuth::login($username, $password);
 
         return [
             'message' => '登陆成功',
-            'token' => $token
+            'token' => $token,
         ];
     }
 
