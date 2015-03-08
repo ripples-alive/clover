@@ -10,8 +10,10 @@ namespace Clover\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Lecture extends Model {
+class Topic extends Model {
 
-    protected $table = 'lecture';
+    protected $table = 'topic';
+
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 
 } 
