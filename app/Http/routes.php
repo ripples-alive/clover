@@ -18,6 +18,6 @@ Route::group(['prefix' => 'user'], function () {
 
 Route::controllers([
     'user' => 'UserController',
-    'lecture' => 'LectureController',
+    'topic' => 'TopicController',
     'comment' => 'CommentController',
 ]);
