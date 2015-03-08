@@ -12,7 +12,6 @@ use Hash;
 use Illuminate\Http\Request;
 
 use Clover\Exceptions\InputException;
-use Clover\Exceptions\Exception;
 use Clover\Models\User;
 
 class GuestController extends Controller {
@@ -26,16 +25,15 @@ class GuestController extends Controller {
             throw new InputException('两次密码不一致');
         }
 
-        $user = new User();
-        $user->username = $username;
-        $user->password = Hash::make($password);
-        if (!$user->save()) {
-            throw new Exception();
-        }
+        $user = User::create([
+            'username' => $username,
+            'password' => Hash::make($password),
+        ]);
 
-        return array(
+        return [
             'message' => '注册成功',
-        );
+            'user' => $user,
+        ];
     }
 
     public function userLogin(Request $request)
@@ -46,15 +44,15 @@ class GuestController extends Controller {
 
         $user = User::where('username', $username)->first();
         if (!$user or !Hash::check($password, $user->password)) {
-           throw new InputException('用户名或密码错误');
+            throw new InputException('用户名或密码错误');
         }
 
         $token = 'TODO';
 
-        return array(
+        return [
             'message' => '登陆成功',
             'token' => $token
-        );
+        ];
     }
 
 } 
