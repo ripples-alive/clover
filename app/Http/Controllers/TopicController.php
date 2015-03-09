@@ -9,12 +9,14 @@
 namespace Clover\Http\Controllers;
 
 use Request;
+use Validator;
 
 use UserAuth;
 use Clover\Exceptions\NotFoundException;
 use Clover\Exceptions\InputException;
 use Clover\Enumerations\TopicType;
 use Clover\Models\Topic;
+use Clover\Models\Like;
 
 class TopicController extends Controller {
 
@@ -94,6 +96,41 @@ class TopicController extends Controller {
         return [
             'message' => '添加帖子成功',
             'topic' => $topic,
+        ];
+    }
+
+    /**
+     * @post id
+     */
+    public function postLike()
+    {
+        $like = new Like();
+        $like->user_id = UserAuth::id();
+
+        $like->topic_id = intval(Request::input('id'));
+        if (Validator::make(['key' => $like->topic_id], ['key' => 'exists:topic,id'])->fails()) {
+            throw new NotFoundException('话题不存在');
+        }
+
+        // TODO: check for already like
+        $like->save();
+
+        return [
+            'message' => '喜欢话题成功',
+        ];
+    }
+
+    /**
+     * @post id
+     */
+    public function postUnlike()
+    {
+        if (!Like::where('user_id', UserAuth::id())->where('topic_id', intval(Request::input('id')))->delete()) {
+            throw new InputException('您没有喜欢此话题');
+        }
+
+        return [
+            'message' => '取消喜欢话题成功',
         ];
     }
 
