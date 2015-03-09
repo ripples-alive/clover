@@ -75,7 +75,7 @@ class TopicController extends Controller {
         }
 
         $topic->type = TopicType::parse(Request::input('type'));
-        if ($topic->type === TopicType::VIDEO) {
+        if ($topic->type === TopicType::VIDEO_STR) {
             if (!Request::hasFile('video')) {
                 throw new InputException('视频不得为空');
             }
