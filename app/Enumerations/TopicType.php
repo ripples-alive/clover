@@ -18,16 +18,22 @@ class TopicType {
 
     const VIDEO = 3;
 
+    const CONSULT_STR = 'consult';
+
+    const LECTURE_STR = 'lecture';
+
+    const VIDEO_STR = 'video';
+
     private static $type_to_string_table = [
-        self::CONSULT => 'consult',
-        self::LECTURE => 'lecture',
-        self::VIDEO => 'video',
+        self::CONSULT => self::CONSULT_STR,
+        self::LECTURE => self::LECTURE_STR,
+        self::VIDEO => self::VIDEO_STR,
     ];
 
     private static $string_to_type_table = [
-        'consult' => self::CONSULT,
-        'lecture' => self::LECTURE,
-        'video' => self::VIDEO,
+        self::CONSULT_STR => self::CONSULT,
+        self::LECTURE_STR => self::LECTURE,
+        self::VIDEO_STR => self::VIDEO,
     ];
 
     public static function stringify($type)
