@@ -18,7 +18,7 @@ class Topic extends Model {
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
-    protected $appends = ['like_count', 'comment_count'];
+    protected $appends = ['author_name', 'like_count', 'comment_count'];
 
     /**
      * 自动将type解析为字符串
@@ -27,6 +27,15 @@ class Topic extends Model {
     public function getTypeAttribute()
     {
         return TopicType::stringify($this->attributes['type']);
+    }
+
+    /**
+     * 自动获取作者名
+     * @return string
+     */
+    public function getAuthorNameAttribute()
+    {
+        return User::find($this->attributes['author'])->username;
     }
 
     /**
