@@ -11,11 +11,13 @@
 |
 */
 
-Route::get('/', 'WelcomeController@index');
-
-Route::get('home', 'HomeController@index');
+Route::group(['prefix' => 'user'], function () {
+    Route::post('register', 'GuestController@userRegister');
+    Route::post('login', 'GuestController@userLogin');
+});
 
 Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
+    'user' => 'UserController',
+    'topic' => 'TopicController',
+    'comment' => 'CommentController',
 ]);

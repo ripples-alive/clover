@@ -139,12 +139,19 @@ return [
 		/*
 		 * Application Service Providers...
 		 */
-		'App\Providers\AppServiceProvider',
-		'App\Providers\BusServiceProvider',
-		'App\Providers\ConfigServiceProvider',
-		'App\Providers\EventServiceProvider',
-		'App\Providers\RouteServiceProvider',
+		'Clover\Providers\AppServiceProvider',
+		'Clover\Providers\BusServiceProvider',
+		'Clover\Providers\ConfigServiceProvider',
+		'Clover\Providers\EventServiceProvider',
+		'Clover\Providers\RouteServiceProvider',
 
+        /*
+         * My Own Service Providers...
+         */
+        'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
+        'Clover\Providers\RandomProvider',
+        'Clover\Providers\ReqLogServiceProvider',
+        'Clover\Providers\UserAuthServiceProvider',
 	],
 
 	/*
@@ -193,6 +200,12 @@ return [
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
 
+        /*
+         * My Own Alias
+         */
+        'ReqLog'    => 'Clover\Facades\ReqLog',
+        'UserAuth'  => 'Clover\Facades\UserAuth',
+        'Random'    => 'Clover\Facades\Random',
 	],
 
 ];

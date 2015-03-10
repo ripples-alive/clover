@@ -1,4 +1,4 @@
-<?php namespace App\Commands;
+<?php namespace Clover\Commands;
 
 abstract class Command {
 

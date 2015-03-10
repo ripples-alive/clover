@@ -1,5 +1,5 @@
 suites:
     main:
-        namespace: App
-        psr4_prefix: App
+        namespace: Clover
+        psr4_prefix: Clover
         src_path: app
