@@ -18,6 +18,11 @@ use Clover\Models\User;
 
 class GuestController extends Controller {
 
+    /**
+     * @post username
+     * @post password
+     * @post email
+     */
     public function userRegister()
     {
         $username = Request::input('username');
@@ -29,9 +34,9 @@ class GuestController extends Controller {
         if (Validator::make(['key' => $password], ['key' => 'min:6'])->fails()) {
             throw new InputException('密码至少为6位');
         }
-        if ($password !== Request::input('password_confirm')) {
-            throw new InputException('两次密码不一致');
-        }
+//        if ($password !== Request::input('password_confirm')) {
+//            throw new InputException('两次密码不一致');
+//        }
 
         $email = Request::input('email');
         if (Validator::make(['key' => $email], ['key' => 'required|email'])->fails()) {
@@ -50,6 +55,10 @@ class GuestController extends Controller {
         ];
     }
 
+    /**
+     * @post username
+     * @post password
+     */
     public function userLogin()
     {
         $username = Request::input('username');
@@ -60,6 +69,7 @@ class GuestController extends Controller {
         return [
             'message' => '登陆成功',
             'token' => $token,
+            'user' => UserAuth::info(),
         ];
     }
 

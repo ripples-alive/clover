@@ -8,13 +8,13 @@
 
 namespace Clover\Http\Controllers;
 
-use Clover\Exceptions\InputException;
-use Clover\Exceptions\NotFoundException;
-use Clover\Models\Follow;
 use Request;
 
 use UserAuth;
 use Validator;
+use Clover\Exceptions\InputException;
+use Clover\Exceptions\NotFoundException;
+use Clover\Models\Follow;
 
 class UserController extends Controller {
 
@@ -35,7 +35,10 @@ class UserController extends Controller {
 
     public function getInfo()
     {
-        // TODO
+        return [
+            'message' => '获取用户信息成功',
+            'user' => UserAuth::info(),
+        ];
     }
 
     public function postUpdateInfo()

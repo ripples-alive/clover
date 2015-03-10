@@ -55,7 +55,8 @@ class CommentController extends Controller {
         $reply_to = Request::input('reply_to');
         if (!empty($reply_to)) {
             $comment->reply_to = intval($reply_to);
-            if (Validator::make(['key' => $comment->reply_to], ['key' => 'exists:comment,id'])->fails()) {
+            if (Validator::make(['key' => $comment->reply_to],
+                ['key' => "exists:comment,id,topic_id,{$comment->topic_id}"])->fails()) {
                 throw new NotFoundException('回复的评论不存在');
             }
         }

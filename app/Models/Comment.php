@@ -16,4 +16,15 @@ class Comment extends Model {
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
+    protected $appends = ['author_name'];
+
+    /**
+     * 自动获取作者名
+     * @return string
+     */
+    public function getAuthorNameAttribute()
+    {
+        return User::find($this->attributes['author'])->username;
+    }
+
 } 
