@@ -60,6 +60,7 @@ class GuestController extends Controller {
         return [
             'message' => '登陆成功',
             'token' => $token,
+            'user' => UserAuth::info(),
         ];
     }
 
