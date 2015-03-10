@@ -19,7 +19,7 @@ class Follow extends Model {
     public static function listFollowUser($follower)
     {
         return self::join('user', 'star', '=', 'user.id')->where('follower', $follower)
-            ->select(['user.id', 'username', 'email'])->get();
+            ->select(['user.id', 'username', 'email'])->orderBy('follow.created_at', 'desc')->get();
     }
 
 }

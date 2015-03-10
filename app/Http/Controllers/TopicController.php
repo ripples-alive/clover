@@ -138,4 +138,15 @@ class TopicController extends Controller {
         ];
     }
 
+    /**
+     * @post type
+     */
+    public function getListLike()
+    {
+        return [
+            'message' => '列出喜欢的视频成功',
+            'videos' => Like::listLikeTopic(UserAuth::id(), TopicType::VIDEO),
+        ];
+    }
+
 } 
