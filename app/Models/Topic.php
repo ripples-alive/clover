@@ -18,6 +18,8 @@ class Topic extends Model {
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
+    protected $appends = ['like_count', 'comment_count'];
+
     /**
      * 自动将type解析为字符串
      * @return string
@@ -25,6 +27,24 @@ class Topic extends Model {
     public function getTypeAttribute()
     {
         return TopicType::stringify($this->attributes['type']);
+    }
+
+    /**
+     * 自动统计出话题被喜欢次数
+     * @return int
+     */
+    public function getLikeCountAttribute()
+    {
+        return Like::where('topic_id', $this->attributes['id'])->count();
+    }
+
+    /**
+     * 自动统计出话题被评论次数
+     * @return int
+     */
+    public function getCommentCountAttribute()
+    {
+        return Comment::where('topic_id', $this->attributes['id'])->count();
     }
 
 } 

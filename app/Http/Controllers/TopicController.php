@@ -12,6 +12,8 @@ use Request;
 use Validator;
 
 use UserAuth;
+use Random;
+use ReqLog;
 use Clover\Exceptions\NotFoundException;
 use Clover\Exceptions\InputException;
 use Clover\Enumerations\TopicType;
@@ -83,10 +85,12 @@ class TopicController extends Controller {
             }
 
             $video = Request::file('video');
-            $file_type = $video->getMimeType();
+            $des_name = date('Y-m-d-H-i-s-') . Random::digitsAndLowercase();
+            $topic->video = $des_name;
             // TODO: check type
-            // TODO: permanently save file
-            $topic->video = $file_type;
+            $topic->video_type = $video->getMimeType();
+            $video->move('../storage/video/', $des_name);
+            ReqLog::debug($topic->video_type);
         }
 
         $topic->price = intval(Request::input('price'));
