@@ -85,7 +85,7 @@ class TopicController extends Controller {
             }
 
             $video = Request::file('video');
-            $des_name = date('Y-m-d-H-i-s-') . Random::digitsAndLowercase();
+            $des_name = date('Y-m-d-H-i-s-') . Random::digitsAndLowercase() . '.' . $video->getClientOriginalExtension();
             $topic->video = $des_name;
             // TODO: check type
             $topic->video_type = $video->getMimeType();

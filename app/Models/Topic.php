@@ -30,6 +30,17 @@ class Topic extends Model {
     }
 
     /**
+     * 自动将video的视频修改为下载地址
+     * @return mixed
+     */
+    public function getVideoAttribute()
+    {
+        if ($this->attributes['video']) {
+            return "http://{$_SERVER['HTTP_HOST']}/static/video?name={$this->attributes['video']}";
+        }
+    }
+
+    /**
      * 自动获取作者名
      * @return string
      */
