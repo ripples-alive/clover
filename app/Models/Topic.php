@@ -18,7 +18,7 @@ class Topic extends Model {
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
-    protected $appends = ['author_name', 'like_count', 'comment_count'];
+    protected $appends = ['author_name', 'like_count', 'comment_count', 'like_it'];
 
     /**
      * 自动将type解析为字符串
@@ -65,6 +65,16 @@ class Topic extends Model {
     public function getCommentCountAttribute()
     {
         return Comment::where('topic_id', $this->attributes['id'])->count();
+    }
+
+    /**
+     * 自动判断出当前用户是否喜欢了此话题
+     * @return bool
+     */
+    public function getLikeItAttribute()
+    {
+        $like = Like::where('topic_id', $this->attributes['id'])->where('user_id', \UserAuth::id())->first();
+        return !empty($like);
     }
 
 } 
