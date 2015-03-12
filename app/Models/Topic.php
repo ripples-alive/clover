@@ -18,7 +18,7 @@ class Topic extends Model {
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
-    protected $appends = ['author_name', 'like_count', 'comment_count'];
+    protected $appends = ['author_name', 'like_count', 'comment_count', 'like_it'];
 
     /**
      * 自动将type解析为字符串
@@ -27,6 +27,17 @@ class Topic extends Model {
     public function getTypeAttribute()
     {
         return TopicType::stringify($this->attributes['type']);
+    }
+
+    /**
+     * 自动将video的视频修改为下载地址
+     * @return mixed
+     */
+    public function getVideoAttribute()
+    {
+        if ($this->attributes['video']) {
+            return "http://{$_SERVER['HTTP_HOST']}/static/video?name={$this->attributes['video']}";
+        }
     }
 
     /**
@@ -54,6 +65,16 @@ class Topic extends Model {
     public function getCommentCountAttribute()
     {
         return Comment::where('topic_id', $this->attributes['id'])->count();
+    }
+
+    /**
+     * 自动判断出当前用户是否喜欢了此话题
+     * @return bool
+     */
+    public function getLikeItAttribute()
+    {
+        $like = Like::where('topic_id', $this->attributes['id'])->where('user_id', \UserAuth::id())->first();
+        return !empty($like);
     }
 
 } 

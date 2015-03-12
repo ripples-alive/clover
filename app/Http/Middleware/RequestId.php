@@ -27,7 +27,7 @@ class RequestId implements Middleware {
         $response = $next($request);
 
         // Add request id to the returned json.
-        if ($this->shouldBeJson($response->original)) {
+        if (isset($response->original) && $this->shouldBeJson($response->original)) {
             $response->original['rqid'] = ReqLog::getRequestId();
             $response->setContent($response->original);
         }

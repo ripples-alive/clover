@@ -20,4 +20,5 @@ Route::controllers([
     'user' => 'UserController',
     'topic' => 'TopicController',
     'comment' => 'CommentController',
+    'static' => 'StaticController',
 ]);
