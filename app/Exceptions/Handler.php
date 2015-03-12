@@ -48,7 +48,7 @@ class Handler extends ExceptionHandler {
 
         return response()->json([
             'error' => ($e instanceof Exception) ? $e->getName() : 'error',
-            'message' => $e->getMessage(),
+            'message' => ($e instanceof Exception) ? $e->getMessage() : '未知错误',
             'rqid' => ReqLog::getRequestId(),
             'stack' => config('app.debug') ? $e->getTrace() : null,
         ]);

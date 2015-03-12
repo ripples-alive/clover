@@ -23,7 +23,7 @@ class Like extends Model {
 //                'topic.created_at', 'topic.updated_at'])->orderBy('like.created_at', 'desc')->get();
         // Just temporary
         $topic_ids = self::where('user_id', $user_id)->orderBy('created_at', 'desc')->lists('topic_id');
-        return Topic::whereIn('id', $topic_ids)->get();
+        return Topic::whereIn('id', $topic_ids)->where('type', $type)->get();
     }
 
 } 
